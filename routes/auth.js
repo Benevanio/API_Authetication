@@ -46,7 +46,7 @@ router.post('/login', async (req, res) => {
     // Validate the data before we make a user
     const {
         error
-    } = RegisterValidation(req.body);
+    } =LoginValidation(req.body);
     if (error) return res.status(400).send(error.details[0].message);
     //email exist
     const emailExist = await User.findOne({
@@ -55,7 +55,8 @@ router.post('/login', async (req, res) => {
     if (emailExist) return res.status(400).send('Email not found');
     //password is correct
     const validPass = await bcrypt.compare(req.body.password, User.password);
-    if (!validPass) return res.status(400).send('Invalid password');
+    if (!validPass) return res.status(400).send('Invalid password')
+    ;
 
     const token = Jwt.sign({
             _id: User._id

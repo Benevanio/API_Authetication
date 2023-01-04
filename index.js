@@ -19,6 +19,7 @@ app.use(express.json());
 app.use('/api/user', authRoute);
 app.use('/api/posts', postRoute);
 
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
